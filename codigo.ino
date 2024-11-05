@@ -1,7 +1,10 @@
+// C++ code
 #include <Wire.h>
 #include <Keypad.h>
 #include <Adafruit_LiquidCrystal.h>
+#include <Servo.h>
 
+Servo servoCofre;
 const byte LINHAS = 4;
 const byte COLUNAS = 4;
 char teclas[LINHAS][COLUNAS] = {
@@ -30,6 +33,8 @@ void setup() {
   pinMode(buzzer, OUTPUT);
   digitalWrite(ledVerde, LOW);
   digitalWrite(ledVermelho, LOW);
+  servoCofre.attach(2);
+  servoCofre.write(0);
   
   lcd.begin(16, 2);
   lcd.print("Use 'A' para");
@@ -61,11 +66,13 @@ void verificarCodigo() {
     delay(1000);
     noTone(buzzer);
     lcd.print("Codigo Correto!");
-    delay(2000);
+    servoCofre.write(90);
+  	delay(5000);
+  	servoCofre.write(0);
     digitalWrite(ledVerde, LOW);
   } else {
     digitalWrite(ledVermelho, HIGH);
-    tone(buzzer, 40);
+    tone(buzzer, 85);
     delay(1000);
     noTone(buzzer);
     lcd.print("Codigo Incorreto!");
