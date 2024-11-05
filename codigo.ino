@@ -65,7 +65,7 @@ void verificarCodigo() {
     digitalWrite(ledVerde, LOW);
   } else {
     digitalWrite(ledVermelho, HIGH);
-    tone(buzzer, 85);
+    tone(buzzer, 40);
     delay(1000);
     noTone(buzzer);
     lcd.print("Codigo Incorreto!");
